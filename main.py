@@ -1,6 +1,13 @@
 #This is the main file where the heart of my program will reside. 
 from pymongo import MongoClient
 
+#Goals: 
+    #Build a connection to mongo DB
+    #Find site to scrape information off of
+    #Enter information in DB
+    #Pull information from DB and build a graph from the information 
+    
+
 #This function greets the user and starts the entire program.
 def main():
     print("\033c")

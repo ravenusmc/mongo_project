@@ -9,10 +9,40 @@ import requests
 #https://en.wikipedia.org/wiki/Executive_order
 
 response = requests.get('https://en.wikipedia.org/wiki/Executive_order')
-page = BeautifulSoup(response.content, 'lxml')
+soup = BeautifulSoup(response.content, 'lxml')
+# print(soup.prettify())
+# print(soup.find_all('a'))
 # print(page.find('table', {'class': 'wikitable sortable'}))
 #print(page.select('table.wikitable.sortable'))
-print(page.select('th'))
+#table = soup.select('table.wikitable.sortable')
+# print(page.select('tr'))
+# print(table)
+
+# print(table.find_all('td'))
+
+for tr in soup.find_all('tr')[1:45]:
+    tds = tr.find_all('td')
+    print(tds)
+
+# links = soup.find_all('a')
+# for link in links:
+#   if "/wiki/" in link:
+#   #print(link.get('href'))
+#     print(link.text)
+
+
+
+
+
+
+
+
+
+# cols = []
+# for tr in table('td').select('td'):
+#   link = th.select_one('a')
+#   cols.append({'name': link.text, 'href': link.attrs['href']})
+#   print(cols)
 
 
 
