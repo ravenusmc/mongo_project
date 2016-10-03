@@ -1,10 +1,12 @@
 #This is the main file where the heart of my program will reside. 
 from pymongo import MongoClient
+from bs4 import BeautifulSoup
+import requests 
 
 #Goals: 
-    #Build a connection to mongo DB
-    #Find site to scrape information off of
-    #Enter information in DB
+    #Build a connection to mongo DB -DONE 
+    #Find site to scrape information off of -Done
+    #Enter information in DB 
     #Pull information from DB and build a graph from the information 
     
 

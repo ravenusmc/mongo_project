@@ -20,9 +20,24 @@ soup = BeautifulSoup(response.content, 'lxml')
 
 # print(table.find_all('td'))
 
+#Working on getting the Presidents names 
+presidents = []
 for tr in soup.find_all('tr')[1:45]:
     tds = tr.find_all('td')
-    print(tds)
+    president = tds[0].text
+    presidents.append(president)
+
+print(presidents)
+
+
+#These lines get the number of executive orders 
+# orders = []
+# for tr in soup.find_all('tr')[1:45]:
+#     tds = tr.find_all('td')
+#     order = tds[1].text
+#     orders.append(order)
+
+# print(orders)
 
 # links = soup.find_all('a')
 # for link in links:
