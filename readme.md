@@ -6,4 +6,4 @@ This is a project where I am will be working with the Mongo DB, Python and possi
 # Getting started
 ### Installing 
 
-  Other than Python 3.4 or simply Python 3.X you will also need pymongo installed. 
+  Other than Python 3.4 or simply Python 3.X you will also need pymongo, pandas, numpy, BeautifulSoup, requests and matplotlib.pyplot installed. 

@@ -1,15 +1,20 @@
 #All ideas that I am testing out I place into this file. 
-
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import requests 
+import csv
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt
+from datetime import datetime
 
 #### Web Scraping ####
 
+#Site I will be using:
 #https://en.wikipedia.org/wiki/Executive_order
 
-response = requests.get('https://en.wikipedia.org/wiki/Executive_order')
-soup = BeautifulSoup(response.content, 'lxml')
+# response = requests.get('https://en.wikipedia.org/wiki/Executive_order')
+# soup = BeautifulSoup(response.content, 'lxml')
 # print(soup.prettify())
 # print(soup.find_all('a'))
 # print(page.find('table', {'class': 'wikitable sortable'}))
@@ -18,51 +23,19 @@ soup = BeautifulSoup(response.content, 'lxml')
 # print(page.select('tr'))
 # print(table)
 
-# print(table.find_all('td'))
 
-executive_orders = []
-for tr in soup.find_all('tr')[1:45]:
-  tds = tr.find_all('td')
-  name = tds[0].text
-  order = tds[1].text
-  orders = {'President': name, 'Orders': order}
-  executive_orders.append(orders)
-
-print(executive_orders)
+# orders = pd.read_csv("executive_orders.csv")
+#data = pd.read_csv('executive_orders.csv', error_bad_lines=False)
+data = pd.read_csv('executive_orders.csv', error_bad_lines=False)
+print(data)
 
 
 
 
-#Working on getting the Presidents names 
-# presidents = []
-# for tr in soup.find_all('tr')[1:45]:
-#     tds = tr.find_all('td')
-#     president = tds[0].text
-#     presidents.append(president)
-
-# print(presidents)
-
-
-#These lines get the number of executive orders 
-# orders = []
-# for tr in soup.find_all('tr')[1:45]:
-#     tds = tr.find_all('td')
-#     order = tds[1].text
-#     orders.append(order)
-
-
-# cols = []
-# for tr in table('td').select('td'):
-#   link = th.select_one('a')
-#   cols.append({'name': link.text, 'href': link.attrs['href']})
-#   print(cols)
 
 
 
-# coll.insert(nobel_winners) #Inserting the nobel winners dictionary to the collection. 
 
-# res = coll.find({'category':'Physics'})
-# print(list(res))
 
 
 ########## PROOF OF CONCEPT ###########
