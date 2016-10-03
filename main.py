@@ -23,11 +23,24 @@ def main():
 def database_setup():
     print("\033c")
     client = MongoClient() #Setting up the connection to mongo DB
-    db = client.practice #Creating a practice DB
-    coll = db.test #Creating a winners collection within the practice DB
+    db = client.executive_orders #Creating a practice DB
+    coll = db.orders #Creating a winners collection within the practice DB
     input("Database now set up! Enter to continue! ")
-    enter_data(coll)
+    scrape_data(coll)
 
+def scrape_data(coll):
+    print("\033c")
+    response = requests.get('https://en.wikipedia.org/wiki/Executive_order')
+    soup = BeautifulSoup(response.content, 'lxml')
+    executive_orders = []
+    #This for loop will find the data that I need and pull it into the mongo DB.
+    for tr in soup.find_all('tr')[1:45]:
+        tds = tr.find_all('td')
+        name = tds[0].text
+        order = tds[1].text
+        orders = {'President': name, 'Orders': order}
+        executive_orders.append(orders)
+    coll.insert(executive_orders) #Inserting the executive orders dictionary into the collection.
 
 
 

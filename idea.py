@@ -20,14 +20,27 @@ soup = BeautifulSoup(response.content, 'lxml')
 
 # print(table.find_all('td'))
 
-#Working on getting the Presidents names 
-presidents = []
+executive_orders = []
 for tr in soup.find_all('tr')[1:45]:
-    tds = tr.find_all('td')
-    president = tds[0].text
-    presidents.append(president)
+  tds = tr.find_all('td')
+  name = tds[0].text
+  order = tds[1].text
+  orders = {'President': name, 'Orders': order}
+  executive_orders.append(orders)
 
-print(presidents)
+print(executive_orders)
+
+
+
+
+#Working on getting the Presidents names 
+# presidents = []
+# for tr in soup.find_all('tr')[1:45]:
+#     tds = tr.find_all('td')
+#     president = tds[0].text
+#     presidents.append(president)
+
+# print(presidents)
 
 
 #These lines get the number of executive orders 
@@ -36,21 +49,6 @@ print(presidents)
 #     tds = tr.find_all('td')
 #     order = tds[1].text
 #     orders.append(order)
-
-# print(orders)
-
-# links = soup.find_all('a')
-# for link in links:
-#   if "/wiki/" in link:
-#   #print(link.get('href'))
-#     print(link.text)
-
-
-
-
-
-
-
 
 
 # cols = []
