@@ -6,6 +6,7 @@ import csv
 import pandas as pd 
 import numpy as np 
 import matplotlib.pyplot as plt
+from valid import *
 
 #Goals: 
     #Build a connection to mongo DB -DONE 
@@ -22,7 +23,22 @@ def main():
     print("Welcome to Py Mongo Project")
     print("---------------------------")
     input("Press Enter to continue ")
-    database_setup()
+    options_menu()
+
+#This function is where the user will choose to look at a graph of the data or use Mongo DB to search through 
+#the data.
+def options_menu():
+    print("\033c")
+    print("1. Look at a graph of the data.")
+    print("2. Search through the data")
+    choice = int(input("What is your option? "))
+    while not options_menu_Valid(choice):
+        print("That was not a correct selection!")
+        choice = int(input("What is your option? "))
+    if choice == 1:
+        plotting_data()
+    elif choice == 2:
+        database_setup()
 
 #This function will establish the connection to the Mongo DB, create a DB as well as a collection. 
 def database_setup():
@@ -34,7 +50,9 @@ def database_setup():
     input("Database now set up! Enter to continue! ")
     scrape_data(coll)
 
-#This function will go out to the wikipedia site, pull the data and place it into the mongo DB. 
+#This function will go out to the wikipedia site, pull the data and place it into the mongo DB. Since this will really
+#only need to happen once, then this function is not 100% critical to the program. I leave it here for the simple
+#reason that I want to see how I did this in future projects as well as let others see.
 def scrape_data(coll):
     print("\033c")
     response = requests.get('https://en.wikipedia.org/wiki/Executive_order')
@@ -70,10 +88,12 @@ def create_csv(executive_orders):
     input("CSV Created! Hit Enter to continue!")
     see_results()
 
-def see_results():
+def plotting_data():
     print("\033c")
     executive_orders = pd.read_csv('executive_orders.csv')
     print(executive_orders)
+
+
 
 
 
