@@ -23,14 +23,41 @@ from datetime import datetime
 # print(page.select('tr'))
 # print(table)
 
+#43 names 
+
 
 # orders = pd.read_csv("executive_orders.csv")
 #data = pd.read_csv('executive_orders.csv', error_bad_lines=False)
-data = pd.read_csv('executive_orders.csv', error_bad_lines=False)
-print(data)
 
+#### WAY ONE 
+# executive_orders = pd.read_csv('executive_orders.csv')
+# names = []
+# orders = []
 
+# count = 0 
+# while count <= 43:
+#   name = executive_orders.iat[count, 0]
+#   order = executive_orders.iat[count, 1]
+#   names.append(name)
+#   orders.append(order)
+#   count += 1
 
+#   fig = plt.figure(dpi=128, figsize=(10,6))
+#   plt.plot(names, orders, linewidth=2, c="red")
+#   plt.title("Executive Orders By President", fontsize=24)
+#   plt.xlabel('President', fontsize=16)
+#   fig.autofmt_xdate()
+#   plt.ylabel("Executive Orders", fontsize=16)
+#   plt.show()
+
+# print(orders)
+
+#### WAY TWO
+executive_orders = pd.read_csv('executive_orders.csv', usecols=["President", "Orders"], index_col=["President"])
+orders = executive_orders[["Orders"]]
+orders.plot(kind='bar', title = "Executive Orders", figsize=(12,8), bottom=0.34)
+plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.34)
+plt.show()
 
 
 

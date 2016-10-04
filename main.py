@@ -88,14 +88,31 @@ def create_csv(executive_orders):
     input("CSV Created! Hit Enter to continue!")
     see_results()
 
+#This function is where I will be plotting the data and have a graph that appears for the user. 
 def plotting_data():
     print("\033c")
-    executive_orders = pd.read_csv('executive_orders.csv')
-    print(executive_orders)
+    executive_orders = pd.read_csv('executive_orders.csv', usecols=["President", "Orders"], index_col=["President"])
+    print("Once the graph appears, close it to contine!")
+    input("Press enter to make the graph appear ")
+    orders = executive_orders[["Orders"]]
+    orders.plot(kind='bar', title = "Executive Orders", figsize=(12,8), bottom=0.34)
+    plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.34)
+    plt.show()
+    quit_main_menu()
 
 
-
-
-
+### Non critical Functions here 
+def quit_main_menu():
+    print("1. Options Menu")
+    print("2. Quit")
+    choice = int(input("What is your choice? "))
+    while not options_menu_Valid(choice):
+        print("That was not a correct selection!")
+        choice = int(input("What is your option? "))
+    if choice == 1:
+        options_menu()
+    elif choice == 2:
+        print("Thank you for using the program")
+        print("Take care!")
 
 main()
