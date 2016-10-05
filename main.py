@@ -100,6 +100,10 @@ def plotting_data():
     plt.show()
     quit_main_menu()
 
+#This function is where the user will query the mongo DB looking for information. 
+def query_data():
+    print("\033c")
+
 
 ### Non critical Functions here 
 def quit_main_menu():
