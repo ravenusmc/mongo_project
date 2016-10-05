@@ -7,8 +7,15 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 from datetime import datetime
+from urllib.request import urlopen
+
+html = urlopen("http://www.pythonscraping.com/pages/page1.html")
+bsObj = BeautifulSoup(html.read(), 'lxml')
+print(bsObj.h1)
 
 #### Web Scraping ####
+
+
 
 #Site I will be using:
 #https://en.wikipedia.org/wiki/Executive_order
@@ -53,11 +60,11 @@ from datetime import datetime
 # print(orders)
 
 #### WAY TWO
-executive_orders = pd.read_csv('executive_orders.csv', usecols=["President", "Orders"], index_col=["President"])
-orders = executive_orders[["Orders"]]
-orders.plot(kind='bar', title = "Executive Orders", figsize=(12,8), bottom=0.34)
-plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.34)
-plt.show()
+# executive_orders = pd.read_csv('executive_orders.csv', usecols=["President", "Orders"], index_col=["President"])
+# orders = executive_orders[["Orders"]]
+# orders.plot(kind='bar', title = "Executive Orders", figsize=(12,8), bottom=0.34)
+# plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.34)
+# plt.show()
 
 
 

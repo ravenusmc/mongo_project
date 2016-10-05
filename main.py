@@ -86,7 +86,7 @@ def create_csv(executive_orders):
             row = [str(o[col]) for col in cols]
             f.write(','.join(row)+ '\n')
     input("CSV Created! Hit Enter to continue!")
-    see_results()
+    query_data()
 
 #This function is where I will be plotting the data and have a graph that appears for the user. 
 def plotting_data():
