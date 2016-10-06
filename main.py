@@ -43,10 +43,10 @@ def options_menu():
 #This function will establish the connection to the Mongo DB, create a DB as well as a collection. 
 def database_setup():
     print("\033c")
-    #client = MongoClient() #Setting up the connection to mongo DB
-    #db = client.executive_orders #Creating a practice DB
-    #coll = db.orders #Creating a winners collection within the practice DB
-    coll = "Mike"
+    client = MongoClient() #Setting up the connection to mongo DB
+    db = client.executive_orders #Creating a practice DB
+    coll = db.orders #Creating a winners collection within the practice DB
+    #coll = "Mike"
     input("Database now set up! Enter to continue! ")
     scrape_data(coll)
 
@@ -66,13 +66,13 @@ def scrape_data(coll):
         order = int(order.replace(',', ''))
         orders = {'President': name, 'Orders': order}
         executive_orders.append(orders)
-    #coll.insert(executive_orders) #Inserting the executive orders dictionary into the collection.
+    coll.insert(executive_orders) #Inserting the executive orders dictionary into the collection.
     input('Data entered into data base! Hit enter to continue') 
-    create_csv(executive_orders)
+    create_csv(coll, executive_orders)
 
 #This function will take my dictionary and create a CSV out of it. I want to have my data placed both into a CSV 
 #as well as the db so that I get more practice using both. 
-def create_csv(executive_orders):
+def create_csv(coll, executive_orders):
     print("\033c")
     f = open('executive_orders.csv', 'w')
     #This line gets the data columns from the keys of the dictionary.
@@ -86,7 +86,7 @@ def create_csv(executive_orders):
             row = [str(o[col]) for col in cols]
             f.write(','.join(row)+ '\n')
     input("CSV Created! Hit Enter to continue!")
-    query_data()
+    query_data(coll)
 
 #This function is where I will be plotting the data and have a graph that appears for the user. 
 def plotting_data():
@@ -101,9 +101,19 @@ def plotting_data():
     quit_main_menu()
 
 #This function is where the user will query the mongo DB looking for information. 
-def query_data():
+def query_data(coll):
     print("\033c")
-
+    print("1. Greater than a specific value")
+    print("2. Less than a specific value?")
+    choice = int(input("What is your option? "))
+    while not options_menu_Valid(choice):
+        print("You made an invalid selection!")
+        choice = int(input("What is your option? "))
+    if choice == 1:
+        number = int(input("What value do you want to look above: "))
+        items = coll.find({'Orders': {'$gt': number}})
+        for item in items:
+            print(item)
 
 ### Non critical Functions here 
 def quit_main_menu():
